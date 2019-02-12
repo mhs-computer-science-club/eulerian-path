@@ -36,11 +36,32 @@ class Graph
         return false;
     }
 
+    /**
+     * Determine the number of possible Eulerian paths starting from the given
+     * vertex.
+     *
+     * <p>
+     * TODO - CHECK POINT 6
+     *
+     * @param vStart The starting vertex.
+     *
+     * @return The number of Eulerian paths possible.
+     */
     public int countEulerianPaths(final String vStart) {
         // TODO - complete.
         return 0;
     }
 
+    /**
+     * Get all the Eulerian paths that exist starting at the given vertex.
+     *
+     * <p>
+     * TODO - CHECK POINT 5
+     *
+     * @param vStart The starting vertex.
+     *
+     * @return The set of Eulerian paths found.
+     */
     public Set<List<String>> getEulerianPaths(final String vStart) {
         // TODO - complete.
         return Collections.emptySet();
@@ -71,26 +92,59 @@ class Graph
         return false;
     }
 
+    /**
+     * TODO - CHECK POINT 5
+     *
+     * @return True if the graph has the given vertex; false otherwise.
+     */
     private boolean hasVertex(final String vertex) {
         // TODO - complete.
         return false;
     }
 
+    /**
+     * TODO - CHECK POINT 5
+     *
+     * @return True if the graph is empty; no remaining vertices.
+     */
     private boolean isEmpty() {
         // TODO - complete.
         return false;
     }
 
+    /**
+     * Prepend the given vertex to a given list of vertices.
+     *
+     * <p>
+     * TODO - CHECK POINT 5
+     *
+     * @param vertex The vertex to prepend.
+     * @param path The list of vertices to prepend the new vertext to.
+     *
+     * @return The list after prepending the vertex.
+     */
     private List<String> prepend(final String vertex, final List<String> path)
     {
         // TODO - complete.
         return Collections.emptyList();
     }
 
+    /**
+     * Remove the edge from v1 to v2 from the graph.
+     *
+     * <p>
+     * TODO - CHECK POINT 5
+     */
     private void removeEdge(final String v1, final String v2) {
         // TODO - complete.
     }
 
+    /**
+     * Remove the edge starting at v1 and ending at v2.
+     *
+     * <p>
+     * TODO - CHECK POINT 5
+     */
     private void removeDirectionalEdgeReference(final String v1, final String v2) {
         // TODO - complete.
     }

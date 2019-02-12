@@ -181,3 +181,70 @@ $ ./gradlew test --tests GraphTest.testContainsEulerianPath
 BUILD SUCCESSFUL in 1s
 4 actionable tasks: 3 executed, 1 up-to-date
 ```
+
+Also, you can see that half the problem in the handout is complete if you
+comment out the lines to print the graph and run the application again:
+
+```
+$ java -cp build/libs/eulerian-path.jar EulerianPath build/resources/main/eulerian.dat
+YES 0
+YES 0
+NO
+```
+
+## Algorithm: Find an Eulerian path starting at v?
+
+We can use a *depth first search* approach to find one or even all the Eulerian
+paths available starting at a given vertex.
+
+1. Starting at vertex v, choose one edge and remove it from the graph. Also,
+   remove vertices if they have no remaining edges.
+2. If the connecting vertex was not removed (has other connections), then set
+   this vertex as the starting vertex and repeat the process to determine if
+   there is an Eulerian path in the remaining graph starting from it.
+3. If the connecting vertex was removed:
+   - If the graph is empty (it was the last vertex), then we have found an
+     Eulerian path.
+   - Otherwise, the path does not lead to an Eulerian path.
+
+##### CHECK POINT 5
+
+Complete the **CHECK POINT 5** methods in the `Graph` class to implement the
+algorithm to find all Eulerian paths.
+
+Run the `testGetEulerianPaths` test again and it should succeed:
+
+```
+$ ./gradlew test --tests GraphTest.testGetEulerianPaths
+
+BUILD SUCCESSFUL in 0s
+4 actionable tasks: 4 up-to-date
+```
+
+##### CHECK POINT 6
+
+Complete the **CHECK POINT 5** methods in the `Graph` class to implement the
+algorithm to find all Eulerian paths.
+
+Now you should be able to run all the tests with success:
+
+```
+$ ./gradlew test
+
+BUILD SUCCESSFUL in 1s
+4 actionable tasks: 2 executed, 2 up-to-date
+```
+
+And running the application after building it:
+
+```
+$ ./gradlew build
+
+BUILD SUCCESSFUL in 0s
+5 actionable tasks: 1 executed, 4 up-to-date
+
+$ java -cp build/libs/eulerian-path.jar EulerianPath build/resources/main/eulerian.dat
+YES 1
+YES 2
+NO
+```
