@@ -19,6 +19,17 @@ class Graph
         }
     }
 
+    /**
+     * Determines whether the graph contains at least one Eulerian path
+     * starting at the given vertex.
+     *
+     * <p>
+     * TODO - CHECK POINT 4
+     *
+     * @param vStart The starting vertex.
+     *
+     * @return True if an Eulerian path exists; false otherwise.
+     */
     public boolean containsEulerianPath(final String vStart)
     {
         // TODO - complete.
@@ -35,11 +46,26 @@ class Graph
         return Collections.emptySet();
     }
 
+    /**
+     * Returns the degree of the given vertex.
+     *
+     * <p>
+     * TODO - CHECK POINT 4
+     *
+     * @param vertex The vertex for which to compute the degree.
+     *
+     * @return The degree of the given vertex.
+     */
     private int degree(final String vertex) {
         // TODO - complete.
         return 0;
     }
 
+    /**
+     * TODO - CHECK POINT 4
+     *
+     * @return True if the number provided is even; false otherwise.
+     */
     private boolean isEven(final int number) {
         // TODO - complete.
         return false;
