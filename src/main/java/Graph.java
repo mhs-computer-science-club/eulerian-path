@@ -55,7 +55,32 @@ class Graph
      * @return The number of Eulerian paths possible.
      */
     public int countEulerianPaths(final String vStart) {
-        return getEulerianPaths(vStart).size();
+        int numberOfPaths = 0;
+
+        final Set<String> connectingVertices = graph.get(vStart);
+        for (final String vEnd : connectingVertices) {
+            final Graph clonedGraph = new Graph(graph);
+
+            clonedGraph.removeEdge(vStart, vEnd);
+
+            if (clonedGraph.hasVertex(vEnd))
+            {
+                numberOfPaths += clonedGraph.countEulerianPaths(vEnd);
+            }
+            else
+            {
+                if (clonedGraph.isEmpty())
+                {
+                    ++numberOfPaths;
+                }
+                else
+                {
+                    // not a path leading to a eulerian path...
+                }
+            }
+        }
+
+        return numberOfPaths;
     }
 
     /**
