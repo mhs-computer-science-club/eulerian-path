@@ -1,7 +1,8 @@
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -32,8 +33,14 @@ class Graph
      */
     public boolean containsEulerianPath(final String vStart)
     {
-        // TODO - complete.
-        return false;
+        final Integer numberOfOddDegreeVertices = graph.keySet()
+                .stream()
+                .map(vertex -> isEven(degree(vertex)) ? 0 : 1)
+                .reduce(0, Integer::sum);
+
+        return isEven(degree(vStart))
+                ? numberOfOddDegreeVertices == 0
+                : numberOfOddDegreeVertices == 2;
     }
 
     /**
@@ -48,8 +55,7 @@ class Graph
      * @return The number of Eulerian paths possible.
      */
     public int countEulerianPaths(final String vStart) {
-        // TODO - complete.
-        return 0;
+        return getEulerianPaths(vStart).size();
     }
 
     /**
@@ -63,8 +69,35 @@ class Graph
      * @return The set of Eulerian paths found.
      */
     public Set<List<String>> getEulerianPaths(final String vStart) {
-        // TODO - complete.
-        return Collections.emptySet();
+        final Set<List<String>> paths = new HashSet<>();
+
+        final Set<String> connectingVertices = graph.get(vStart);
+        for (final String vEnd : connectingVertices) {
+            final Graph clonedGraph = new Graph(graph);
+
+            clonedGraph.removeEdge(vStart, vEnd);
+
+            if (clonedGraph.hasVertex(vEnd))
+            {
+                for (List<String> subPath : clonedGraph.getEulerianPaths(vEnd))
+                {
+                    paths.add(prepend(vStart, subPath));
+                }
+            }
+            else
+            {
+                if (clonedGraph.isEmpty())
+                {
+                    paths.add(Arrays.asList(vStart, vEnd));
+                }
+                else
+                {
+                    // not a path leading to a eulerian path...
+                }
+            }
+        }
+
+        return paths;
     }
 
     /**
@@ -78,8 +111,7 @@ class Graph
      * @return The degree of the given vertex.
      */
     private int degree(final String vertex) {
-        // TODO - complete.
-        return 0;
+        return graph.get(vertex).size();
     }
 
     /**
@@ -88,8 +120,7 @@ class Graph
      * @return True if the number provided is even; false otherwise.
      */
     private boolean isEven(final int number) {
-        // TODO - complete.
-        return false;
+        return number % 2 == 0;
     }
 
     /**
@@ -98,8 +129,7 @@ class Graph
      * @return True if the graph has the given vertex; false otherwise.
      */
     private boolean hasVertex(final String vertex) {
-        // TODO - complete.
-        return false;
+        return graph.get(vertex) != null;
     }
 
     /**
@@ -108,8 +138,7 @@ class Graph
      * @return True if the graph is empty; no remaining vertices.
      */
     private boolean isEmpty() {
-        // TODO - complete.
-        return false;
+        return graph.isEmpty();
     }
 
     /**
@@ -125,8 +154,11 @@ class Graph
      */
     private List<String> prepend(final String vertex, final List<String> path)
     {
-        // TODO - complete.
-        return Collections.emptyList();
+        final LinkedList<String> concatenatedList = new LinkedList<>(path);
+
+        concatenatedList.addFirst(vertex);
+
+        return concatenatedList;
     }
 
     /**
@@ -136,7 +168,8 @@ class Graph
      * TODO - CHECK POINT 5
      */
     private void removeEdge(final String v1, final String v2) {
-        // TODO - complete.
+        removeDirectionalEdgeReference(v1, v2);
+        removeDirectionalEdgeReference(v2, v1);
     }
 
     /**
@@ -146,7 +179,13 @@ class Graph
      * TODO - CHECK POINT 5
      */
     private void removeDirectionalEdgeReference(final String v1, final String v2) {
-        // TODO - complete.
+        final Set<String> v1Edges = graph.get(v1);
+        if (v1Edges != null) {
+            v1Edges.remove(v2);
+            if (v1Edges.isEmpty()) {
+                graph.remove(v1);
+            }
+        }
     }
 
     public void printGraph() {
